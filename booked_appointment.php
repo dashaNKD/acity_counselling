@@ -1,3 +1,9 @@
+<?php
+// Assuming you have a function or method to fetch the appointments
+// and it returns the result as $result
+$result = fetchAppointments();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +19,7 @@
 <nav class="bg-gray-800 py-4">
     <div class="container mx-auto flex justify-between items-center px-4">
         <div>
-            <a href="index.html" class="flex items-center text-white text-xl font-bold">
+            <a href="index.php" class="flex items-center text-white text-xl font-bold">
                 <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
                 Acity Counselling Service
             </a>
@@ -39,15 +45,7 @@
     <div class="container mx-auto px-4">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-8">Booked Appointments</h2>
-            <?php
-            // Assuming you have a function or method to fetch the appointments
-            // and it returns the result as $result
-            $result = fetchAppointments();
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {?>
-            <form action="submit_appointment.php" method="post">
-                <input type="hidden" name="id" value="<?= htmlspecialchars($row['id'])?>">
+            <?php if ($result->num_rows > 0) {?>
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
@@ -61,26 +59,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="px-4 py-2"><?= htmlspecialchars($row['name'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($row['roll_number'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($row['email'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($row['date'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($row['time'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($row['message'])?></td>
-                            <td class="px-4 py-2">
-                                <button type="submit" name="accept" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Accept</button>
-                                <button type="submit" name="cancel" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Cancel</button>
-                                <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300" formaction="reschedule.php">Reschedule</button>
-                            </td>
-                        </tr>
+                        <?php while ($row = $result->fetch_assoc()) {?>
+                            <tr>
+                                <td class="px-4 py-2"><?= htmlspecialchars($row['name'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($row['roll_number'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($row['email'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($row['date'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($row['time'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($row['message'])?></td>
+                                <td class="px-4 py-2">
+                                    <form action="submit_appointment.php" method="post">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars($row['id'])?>">
+                                        <button type="submit" name="accept" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Accept</button>
+                                        <button type="submit" name="cancel" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Cancel</button>
+                                        <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6py-3 rounded-lg font-bold transition duration-300" formaction="reschedule.php">Reschedule</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php }?>
                     </tbody>
                 </table>
-            </form>
-            <?php }
-            } else {
-                echo "<tr><td colspan='7' class='text-center'>No appointments found.</td></tr>";
-            }?>
+            <?php } else {?>
+                <p class="text-center">No appointments found.</p>
+            <?php }?>
         </div>
     </div>
 </section>
@@ -89,7 +90,7 @@
 <footer class="bg-gray-800 py-8">
     <div class="container mx-auto px-4">
         <div class="text-center">
-            <a href="index.html" class="flex items-center text-white text-xl font-bold">
+            <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
                 <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
                 Acity Counselling Service
             </a>
