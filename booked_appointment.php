@@ -1,6 +1,4 @@
 <?php
-// Assuming you have a function or method to fetch the appointments
-// and it returns the result as $result
 require_once 'config.php'; // Included the database connection file
 
 // Check if the fetchAppointments function returns a valid result
@@ -69,35 +67,37 @@ if ($result = fetchAppointments()) {
             <?php if (!empty($appointments)) {?>
                 <table class="table-auto w-full">
                     <thead>
-                        <tr>
-                            <th class="px-4 py-2">Name</th>
-                            <th class="px-4 py-2">Roll Number</th>
-                            <th class="px-4 py-2">Email</th>
-                            <th class="px-4 py-2">Date</th>
-                            <th class="px-4 py-2">Time</th>
-                            <th class="px-4 py-2">Message</th>
-                            <th class="px-4 py-2">Action</th>
-                        </tr>
+                    <tr>
+                        <th class="px-4 py-2">Name</th>
+                        <th class="px-4 py-2">Roll Number</th>
+                        <th class="px-4 py-2">Email</th>
+                        <th class="px-4 py-2">Date</th>
+                        <th class="px-4 py-2">Time</th>
+                        <th class="px-4 py-2">Message</th>
+                        <th class="px-4 py-2">Status</th>
+                        <th class="px-4 py-2">Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($appointments as $appointment) {?>
-                            <tr>
-                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['name'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['roll_number'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['email'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['date'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['time'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['message'])?></td>
-                                <td class="px-4 py-2">
-                                    <form action="submit_appointment.php" method="post">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars($appointment['id'])?>">
-                                        <button type="submit" name="accept" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Accept</button>
-                                        <button type="submit" name="cancel" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Cancel</button>
-                                        <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300" formaction="reschedule.php">Reschedule</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        <?php }?>
+                    <?php foreach ($appointments as $appointment) {?>
+                        <tr>
+                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['name'])?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['roll_number'])?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['email'])?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['date'])?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['time'])?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['message'])?></td>
+                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['status'])?></td>
+                            <td class="px-4 py-2">
+                                <form action="submit_appointment.php" method="post">
+                                    <input type="hidden" name="id" value="<?= htmlspecialchars($appointment['id'])?>">
+                                    <button type="submit" name="accept" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 mr-2">Accept</button>
+                                    <button type="submit" name="reject" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 mr-2">Reject</button>
+                                    <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Reschedule</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php }?>
                     </tbody>
                 </table>
             <?php } else {?>
