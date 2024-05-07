@@ -76,7 +76,7 @@ $conn->close();
 <footer class="bg-gray-800 py-8">
     <div class="container mx-auto px-4">
         <div class="text-center">
-            <a href="index.html" class="flex items-center text-white text-xl font-bold">
+            <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
                 <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
                 Acity Counselling Service
             </a>
