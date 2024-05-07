@@ -1,64 +1,82 @@
 <?php
-// Connect to the database
-$host = "localhost";
-$user = "root";
-$password = "";
-$dbname = "appointments";
+// Configuration file for database connection
+require_once 'config.php';
 
-// Create a new mysqli object with error reporting
-$conn = new mysqli($host, $user, $password, $dbname);
+// Function to fetch appointments
+function fetchAppointments() {
+    global $conn;
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+    $stmt = $conn->prepare("SELECT * FROM appointments");
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-// Get the appointment ID and the action from the form
-$id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
-$action = filter_var($_POST['action'], FILTER_SANITIZE_STRING);
-
-// Prepare the SQL statement
-$stmt = $conn->prepare("UPDATE appointments SET status = ? WHERE id = ?");
-
-// Check if the SQL statement was prepared successfully
-if ($stmt) {
-    // Set the status based on the action
-    if ($action == 'accept') {
-        $status = 'accepted';
-    } elseif ($action == 'cancel') {
-        $status = 'canceled';
-    } else {
-        // Redirect back to the booked_appointment.php file with an error message
-        header("Location: booked_appointment.php?error=Invalid+action.");
-        exit();
+    $appointments = array();
+    while ($row = $result->fetch_assoc()) {
+        $appointments[] = $row;
     }
 
-    // Bind parameters by reference
-    $stmt->bind_param("si", $status, $id);
+    $stmt->close();
 
-    // Execute the SQL statement
-    if ($stmt->execute()) {
-        // Redirect back to the booked_appointment.php file with a success message
-        header("Location: booked_appointment.php?success=Appointment+status+updated+successfully.");
+    return $appointments;
+}
+
+// Process the appointment update
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
+    $action = filter_var($_POST['action'], FILTER_SANITIZE_STRING);
+
+    // Create a new mysqli object with error reporting
+    global $conn;
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: ". $conn->connect_error);
+    }
+
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("UPDATE appointments SET status =? WHERE id =?");
+
+    if ($stmt) {
+        switch ($action) {
+            case 'accept':
+                $status = 'accepted';
+                break;
+            case 'cancel':
+                $status = 'canceled';
+                break;
+            case 'reschedule':
+                header("Location: reschedule.php?id=$id");
+                exit();
+            default:
+                header("Location: booked_appointment.php?error=Invalid+action.");
+                exit();
+        }
+
+        // Bind parameters by reference
+        $stmt->bind_param("si", $status, $id);
+
+        if ($stmt->execute()) {
+            header("Location: booked_appointment.php?success=Appointment+status+updated+successfully.");
+        } else {
+            header("Location: booked_appointment.php?error=". urlencode($stmt->error));
+        }
     } else {
-        // Redirect back to the booked_appointment.php file with an error message
-        header("Location: booked_appointment.php?error=" . urlencode($stmt->error));
+        header("Location: booked_appointment.php?error=". urlencode($conn->error));
     }
 
     // Close the statement and the connection
     $stmt->close();
+    $conn->close();
 } else {
-    // Redirect back to the booked_appointment.php file with an error message
-    header("Location: booked_appointment.php?error=" . urlencode($conn->error));
+    // Connect to the database
+    global $conn;
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: ". $conn->connect_error);
+    }
 }
 
-// Close the connection
-$conn->close();
-
-// If the action is 'reschedule'
-if ($action == 'reschedule') {
-    // Redirect to the reschedule page with the appointment data
-    header("Location: reschedule.php?id=$id");
-    exit();
-}
-?>
+// Display submitted appointments
+$result = fetchAppointments();
+require_once 'booked_appointment.php';
