@@ -2,7 +2,7 @@
 require_once 'config.php'; // Included the database connection file
 
 // Check if the fetchAppointments function returns a valid result
-if ($result = fetchAppointments()) {
+if ($result = $appointments = fetchAppointments($conn)) {
     // Check if fetchAppointments returned a value (not false)
     if (is_bool($result) && !$result) {
       echo 'Error: Unable to fetch appointments';
