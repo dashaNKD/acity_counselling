@@ -1,6 +1,8 @@
 <?php
 // Assuming you have a function or method to fetch the appointments
 // and it returns the result as $result
+require_once 'config.php'; // Added this line to include the database connection file
+
 $result = fetchAppointments();
 ?>
 
@@ -19,7 +21,7 @@ $result = fetchAppointments();
 <nav class="bg-gray-800 py-4">
     <div class="container mx-auto flex justify-between items-center px-4">
         <div>
-            <a href="index.php" class="flex items-center text-white text-xl font-bold">
+            <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
                 <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
                 Acity Counselling Service
             </a>
@@ -79,7 +81,7 @@ $result = fetchAppointments();
                         <?php }?>
                     </tbody>
                 </table>
-            <?php } else {?>
+           <?php } else {?>
                 <p class="text-center">No appointments found.</p>
             <?php }?>
         </div>
