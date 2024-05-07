@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acity Counselling Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles can be added here */
+        body {
+            
+            position: relative;
+            background-image: url('assets/img/background.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        
+        .logo-watermark {
+            position: fixed;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: -1;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            transform: rotate(30deg) scale(1.5);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="bg-gray-800 py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+        <div>
+            <a href="index.html" class="flex items-center text-white text-xl font-bold">
+                <img src="assets/img/currentAcityLogo.png" alt="Logo" class="h-8 mr-2">
+                Acity Counselling Service
+            </a>
+        </div>
+        <div>
+            <a href="about.html" class="text-gray-300 hover:text-white px-3 py-2">About Us</a>
+            <a href="resources.html" class="text-gray-300 hover:text-white px-3 py-2">Resources</a>
+            <a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a>
+            <a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Resource Categories -->
+<section class="bg-gray-100 py-20">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Resource Categories</h2>
+            <nav>
+                <ul class="flex justify-center space-x-4">
+                    <li><a href="resources.html" class="text-blue-500 hover:text-blue-700">All</a></li>
+                    <li><a href="mental-health.html" class="text-gray-700 hover:text-blue-700">Mental Health</a></li>
+                    <li><a href="well-being.html" class="text-gray-700 hover:text-blue-700">Well-Being</a></li>
+                    <li><a href="therapy.html" class="text-gray-700 hover:text-blue-700">Therapy</a></li>
+                    <!-- Add more categories as needed -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+<!-- Resource Listings -->
+<section class="bg-gray-100 py-20">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8">Resource Listings</h2>
+            <div id="resourceList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Resource items will be dynamically added here -->
+                <div class="border rounded-lg p-4 shadow-md">
+                    <a href="mental-health.html"><img src="assets/img/resource1.jpeg" alt="Resource 1" class="w-full h-48 object-cover mb-4"></a>
+                    <h3 class="text-lg font-semibold mb-2">Mental Health</h3>
+                    <p class="mb-8">Mental health is the state of one's mind and emotions. It is an important part of being healthy and well.</p>
+                    <br>
+                    <a href="mental-health.html" class="text-blue-500 hover:text-blue-700">Learn More</a>
+                </div>
+                <!-- Add more resource items as needed -->
+                <div class="border rounded-lg p-4 shadow-md">
+                    <a href="well-being.html"><img src="assets/img/resource2.jpeg" alt="Resource 2" class="w-full h-48 object-cover mb-4"></a>
+                    <h3 class="text-lg font-semibold mb-2">Well-Being</h3>
+                    <p class="text-gray-700">Well-being is a crucial aspect of life. It means keeping yourself and your loved ones healthy.</p>
+                    <br>
+                    <a href="well-being.html" class="text-blue-500 hover:text-blue-700">Learn More</a>
+                </div>
+                <!-- Add more resource items as needed -->
+                <div class="border rounded-lg p-4 shadow-md">
+                    <a href="therapy.html"><img src="assets/img/resource3.jpeg" alt="Resource 3" class="w-full h-48 object-cover mb-4"></a>
+                    <h3 class="text-lg font-semibold mb-2">Therapy</h3>
+                    <p class="text-gray-700">Therapy is a form of psychotherapy that focuses on promoting mental well-being.</p>
+                    <br>
+                    <a href="therapy.html" class="text-blue-500 hover:text-blue-700">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-800 py-8">
+    <div class="container mx-auto px-4">
+        <div class="text-center">
+            <a href="index.html" class="flex items-center text-white text-xl font-bold">
+                <img src="assets/img/currentAcityLogo.png" alt="Logo" class="h-8 mr-2">
+               Acity Counselling Service
+            </a>
+            <p class="text-white">&copy; 2024 Academic City University College Counselling Service. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- JavaScript for filtering resources -->
+<script>
+    // Get the search input and resource list
+    const searchInput = document.getElementById('searchInput');
+    const resourceList = document.getElementById('resourceList');
+
+    // Add an event listener to the search input
+    searchInput.addEventListener('input', () => {
+        // Get the search query
+        const query = searchInput.value.toLowerCase();
+
+        // Filter the resource list based on the search query
+        const filteredResources = Array.from(resourceList.children).filter(resource => {
+            return resource.textContent.toLowerCase().includes(query);
+        });
+
+        // Update the resource list with the filtered resources only
+        resourceList.innerHTML = '';
+        filteredResources.forEach(resource => {
+            resourceList.appendChild(resource);
+        });
+    });
+</script>
+<script src="assets/js/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+.counselor-pic {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom styles can be added here */
+body {
+  position: relative;
+  background-image: url('assets/img/background.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.logo-watermark {
+  position: fixed;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: -1;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  transform: rotate(30deg) scale(1.5);
+}
