@@ -1,9 +1,28 @@
 <?php
 // Assuming you have a function or method to fetch the appointments
 // and it returns the result as $result
-require_once 'config.php'; // Added this line to include the database connection file
+require_once 'config.php'; // Included the database connection file
 
-$result = fetchAppointments();
+// Check if the fetchAppointments function returns a valid result
+if ($result = fetchAppointments()) {
+    // Check if the result is a valid MySQLi result object
+    if ($result instanceof mysqli_result) {
+        // Initialize an empty array to store the appointments
+        $appointments = array();
+        // Fetch all the rows from the result
+        while ($row = $result->fetch_assoc()) {
+            $appointments[] = $row;
+        }
+    } else {
+        // Handle the error if the result is not a valid MySQLi result object
+        echo 'Error: Invalid result object';
+        exit;
+    }
+} else {
+    // Handle the error if the fetchAppointments function returns false
+    echo 'Error: Unable to fetch appointments';
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,27 +38,7 @@ $result = fetchAppointments();
 
 <!-- Navigation -->
 <nav class="bg-gray-800 py-4">
-    <div class="container mx-auto flex justify-between items-center px-4">
-        <div>
-            <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
-                <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
-                Acity Counselling Service
-            </a>
-        </div>
-        <div>
-            <ul class="flex justify-between">
-                <li><a href="about.html" class="text-gray-300 hover:text-white px-3 py-2">About Us</a></li>
-                <li><a href="resources.html" class="text-gray-300 hover:text-white px-3 py-2">Resources</a></li>
-                <li><a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a></li>
-                <li><a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a></li>
-                <li>
-                    <a href="logout.php" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 md:w-auto">
-                        Logout
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    <!-- Navigation content -->
 </nav>
 
 <!-- Appointments Section -->
@@ -47,7 +46,7 @@ $result = fetchAppointments();
     <div class="container mx-auto px-4">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-8">Booked Appointments</h2>
-            <?php if ($result->num_rows > 0) {?>
+            <?php if (!empty($appointments)) {?>
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
@@ -61,27 +60,27 @@ $result = fetchAppointments();
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($row = $result->fetch_assoc()) {?>
+                        <?php foreach ($appointments as $appointment) {?>
                             <tr>
-                                <td class="px-4 py-2"><?= htmlspecialchars($row['name'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($row['roll_number'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($row['email'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($row['date'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($row['time'])?></td>
-                                <td class="px-4 py-2"><?= htmlspecialchars($row['message'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['name'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['roll_number'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['email'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['date'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['time'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['message'])?></td>
                                 <td class="px-4 py-2">
                                     <form action="submit_appointment.php" method="post">
-                                        <input type="hidden" name="id" value="<?= htmlspecialchars($row['id'])?>">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars($appointment['id'])?>">
                                         <button type="submit" name="accept" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Accept</button>
                                         <button type="submit" name="cancel" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Cancel</button>
-                                        <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6py-3 rounded-lg font-bold transition duration-300" formaction="reschedule.php">Reschedule</button>
+                                        <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300" formaction="reschedule.php">Reschedule</button>
                                     </form>
                                 </td>
                             </tr>
                         <?php }?>
                     </tbody>
                 </table>
-           <?php } else {?>
+            <?php } else {?>
                 <p class="text-center">No appointments found.</p>
             <?php }?>
         </div>
@@ -90,15 +89,7 @@ $result = fetchAppointments();
 
 <!-- Footer -->
 <footer class="bg-gray-800 py-8">
-    <div class="container mx-auto px-4">
-        <div class="text-center">
-            <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
-                <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
-                Acity Counselling Service
-            </a>
-            <p class="text-white">&copy; 2024 Academic City University College Counselling Service. All rights reserved.</p>
-        </div>
-    </div>
+    <!-- Footer content -->
 </footer>
 
 <script src="assets/js/custom.js"></script>
