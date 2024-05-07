@@ -83,67 +83,6 @@
     </div>
 </footer>
 
-<!-- JavaScript for form validation and availability check -->
-<script>
-    // Time validation
-    const availableTimes = ['09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30'];
-    const timeSelect = document.getElementById('time');
-    const timeError = document.getElementById('timeError');
-
-    timeSelect.addEventListener('change', () => {
-        const selectedTime = timeSelect.value;
-        if (!availableTimes.includes(selectedTime)) {
-            timeError.classList.remove('hidden');
-        } else {
-            timeError.classList.add('hidden');
-        }
-    });
-
-    // Form validation
-    const form = document.getElementById('appointmentForm');
-    const emailError = document.getElementById('emailError');
-    const dateError = document.getElementById('dateError');
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const email = document.getElementById('email').value;
-        const date = document.getElementById('date').value;
-        const time = document.getElementById('time').value;
-
-        // Email validation
-        if (!email.endsWith('@acity.edu.gh')) {
-            emailError.classList.remove('hidden');
-            return;
-        } else {
-            emailError.classList.add('hidden');
-        }
-
-        // Date validation
-        const today = new Date();
-        const selectedDate = new Date(date);
-        if (selectedDate < today) {
-            dateError.classList.remove('hidden');
-            return;
-        } else {
-            dateError.classList.add('hidden');
-        }
-
-        // Time validation
-        if (!availableTimes.includes(time)) {
-            timeError.classList.remove('hidden');
-            return;
-        } else {
-            timeError.classList.add('hidden');
-        }
-
-        // Reset form
-        form.reset();
-
-        // Submit form
-        alert('Appointment request submitted successfully!');
-    });
-</script>
 <script src="assets/js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
