@@ -3,24 +3,22 @@ require_once 'config.php'; // Included the database connection file
 
 // Check if the fetchAppointments function returns a valid result
 if ($result = fetchAppointments()) {
-    // Check if the result is a valid MySQLi result object
-    if ($result instanceof mysqli_result) {
-        // Initialize an empty array to store the appointments
-        $appointments = array();
-        // Fetch all the rows from the result
-        while ($row = $result->fetch_assoc()) {
-            $appointments[] = $row;
-        }
-    } else {
-        // Handle the error if the result is not a valid MySQLi result object
-        echo 'Error: Invalid result object';
-        exit;
+    // Check if fetchAppointments returned a value (not false)
+    if (is_bool($result) && !$result) {
+      echo 'Error: Unable to fetch appointments';
+      exit;
+    } else if (!($result instanceof mysqli_result)) {
+      // Check if the result is a valid MySQLi result object
+      echo 'Error: Invalid result object';
+      exit;
     }
-} else {
-    // Handle the error if the fetchAppointments function returns false
-    echo 'Error: Unable to fetch appointments';
+    // ... rest of your code where you process $result ...
+  } else {
+    // Handle the scenario where fetchAppointments failed to even execute (e.g., database connection issue)
+    echo 'Error: An unexpected error occurred.';
     exit;
-}
+  }
+  
 ?>
 
 <!DOCTYPE html>
@@ -67,37 +65,37 @@ if ($result = fetchAppointments()) {
             <?php if (!empty($appointments)) {?>
                 <table class="table-auto w-full">
                     <thead>
-                    <tr>
-                        <th class="px-4 py-2">Name</th>
-                        <th class="px-4 py-2">Roll Number</th>
-                        <th class="px-4 py-2">Email</th>
-                        <th class="px-4 py-2">Date</th>
-                        <th class="px-4 py-2">Time</th>
-                        <th class="px-4 py-2">Message</th>
-                        <th class="px-4 py-2">Status</th>
-                        <th class="px-4 py-2">Action</th>
-                    </tr>
+                        <tr>
+                            <th class="px-4 py-2">Name</th>
+                            <th class="px-4 py-2">Roll Number</th>
+                            <th class="px-4 py-2">Email</th>
+                            <th class="px-4 py-2">Date</th>
+                            <th class="px-4 py-2">Time</th>
+                            <th class="px-4 py-2">Message</th>
+                            <th class="px-4 py-2">Status</th>
+                            <th class="px-4 py-2">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($appointments as $appointment) {?>
-                        <tr>
-                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['name'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['roll_number'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['email'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['date'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['time'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['message'])?></td>
-                            <td class="px-4 py-2"><?= htmlspecialchars($appointment['status'])?></td>
-                            <td class="px-4 py-2">
-                                <form action="submit_appointment.php" method="post">
-                                    <input type="hidden" name="id" value="<?= htmlspecialchars($appointment['id'])?>">
-                                    <button type="submit" name="accept" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 mr-2">Accept</button>
-                                    <button type="submit" name="reject" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 mr-2">Reject</button>
-                                    <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Reschedule</button>
-                                </form>
-                            </td>
-                        </tr>
-                    <?php }?>
+                        <?php foreach ($appointments as $appointment) {?>
+                            <tr>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['name'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['roll_number'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['email'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['date'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['time'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['message'])?></td>
+                                <td class="px-4 py-2"><?= htmlspecialchars($appointment['status'])?></td>
+                                <td class="px-4 py-2">
+                                    <form action="submit_appointment.php" method="post">
+                                        <input type="hidden" name="id" value="<?= htmlspecialchars($appointment['id'])?>">
+                                        <button type="submit" name="accept" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 mr-2">Accept</button>
+                                        <button type="submit" name="reject" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 mr-2">Reject</button>
+                                        <button type="submit" name="reschedule" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Reschedule</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php }?>
                     </tbody>
                 </table>
             <?php } else {?>
