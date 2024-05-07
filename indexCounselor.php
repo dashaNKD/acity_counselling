@@ -91,6 +91,7 @@
             <p class="text-black">&copy; 2024 Academic City University College Counselling Service. All rights reserved.</p>
         </div>
     </div>
+</footer>
 
 <script src="assets/js/scriptUser.js"></script>
 <script src="assets/js/script.js"></script>
