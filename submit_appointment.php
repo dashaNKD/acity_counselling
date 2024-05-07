@@ -81,4 +81,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $conn->close(); // Close the database connection (optional, can be closed in a central location)
-?>
