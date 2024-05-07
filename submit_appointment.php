@@ -53,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     echo "</ul>";
     // Include the form again with pre-filled data (optional, improve user experience)
-    include 'form.html'; // Replace with your form template
+    include 'appointments.html'; // Replace with your form template
   }
 } else {
   // Display the appointment submission form
-  include 'form.html'; // Replace with your form template
+  include 'appointments.html'; // Replace with your form template
 }
 
 $conn->close(); // Close the database connection (optional, can be closed in a central location)
