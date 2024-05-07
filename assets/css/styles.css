@@ -1,3 +1,4 @@
+/* Custom styles can be added here */
 .counselor-pic {
   border-radius: 50%;
   width: 150px;
@@ -7,7 +8,6 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Custom styles can be added here */
 body {
   position: relative;
   background-image: url('assets/img/background.jpeg');
@@ -15,7 +15,6 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
 .logo-watermark {
   position: fixed;
   opacity: 0.05;
