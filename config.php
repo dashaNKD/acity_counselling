@@ -61,4 +61,3 @@ if ($action == 'reschedule') {
     header("Location: reschedule.php?id=$id");
     exit();
 }
-?>
