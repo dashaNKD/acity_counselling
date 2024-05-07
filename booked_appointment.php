@@ -17,8 +17,7 @@ if ($result = $appointments = fetchAppointments($conn)) {
     // Handle the scenario where fetchAppointments failed to even execute (e.g., database connection issue)
     echo 'Error: An unexpected error occurred.';
     exit;
-  }
-  
+}  
 ?>
 
 <!DOCTYPE html>
