@@ -19,4 +19,3 @@ if ($conn->connect_error) {
     echo "Connection to DB failed: ". $conn->connect_error;
     exit(); // Exit the script to prevent further execution
 }
-?>
