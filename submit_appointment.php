@@ -37,10 +37,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()) {
       // Appointment creation successful, redirect to booked_appointments.php
-      header("Location: booked_appointments.php?success=Appointment+submitted+successfully.");
+      header("Location: booked_appointment.php?success=Appointment+submitted+successfully.");
     } else {
       // Appointment creation failed, redirect with error message
-      header("Location: booked_appointments.php?error=" . urlencode($stmt->error));
+      header("Location: booked_appointment.php?error=" . urlencode($stmt->error));
     }
 
     $stmt->close();
