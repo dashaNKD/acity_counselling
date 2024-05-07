@@ -38,7 +38,27 @@ if ($result = fetchAppointments()) {
 
 <!-- Navigation -->
 <nav class="bg-gray-800 py-4">
-    <!-- Navigation content -->
+    <div class="container mx-auto flex justify-between items-center px-4">
+        <div>
+            <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
+                <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
+                Acity Counselling Service
+            </a>
+        </div>
+        <div>
+            <ul class="flex justify-between">
+                <li><a href="about.html" class="text-gray-300 hover:text-white px-3 py-2">About Us</a></li>
+                <li><a href="resources.html" class="text-gray-300 hover:text-white px-3 py-2">Resources</a></li>
+                <li><a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a></li>
+                <li><a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a></li>
+                <li>
+                    <a href="logout.php" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 md:w-auto">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
 <!-- Appointments Section -->
@@ -89,7 +109,15 @@ if ($result = fetchAppointments()) {
 
 <!-- Footer -->
 <footer class="bg-gray-800 py-8">
-    <!-- Footer content -->
+    <div class="container mx-auto px-4">
+        <div class="text-center">
+            <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
+                <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
+                Acity Counselling Service
+            </a>
+            <p class="text-white">&copy; 2024 Academic City University College Counselling Service. All rights reserved.</p>
+        </div>
+    </div>
 </footer>
 
 <script src="assets/js/custom.js"></script>
