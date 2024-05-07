@@ -12,63 +12,67 @@
 <body>
 
 <!-- Navigation -->
-<nav class="bg-gray-800 py-4">
-    <div class="container mx-auto flex justify-between items-center px-4">
-        <div>
-            <a href="index.html" class="flex items-center text-white text-xl font-bold">
-                <img src="assets/img/currentAcityLogo.png" alt="Logo" class="h-8 mr-2">
-                Acity Counselling Service
-            </a>
+<header>
+    <nav class="bg-gray-800 py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <div>
+                <a href="index.html" class="flex items-center text-white text-xl font-bold">
+                    <img src="assets/img/currentAcityLogo.png" alt="Logo" class="h-8 mr-2">
+                    Acity Counselling Service
+                </a>
+            </div>
+            <div>
+                <a href="about.html" class="text-gray-300 hover:text-white px-3 py-2">About Us</a>
+                <a href="resources.html" class="text-gray-300 hover:text-white px-3 py-2">Resources</a>
+                <a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a>
+                <a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a>
+            </div>
         </div>
-        <div>
-            <a href="about.html" class="text-gray-300 hover:text-white px-3 py-2">About Us</a>
-            <a href="resources.html" class="text-gray-300 hover:text-white px-3 py-2">Resources</a>
-            <a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a>
-            <a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a>
-        </div>
-    </div>
-</nav>
+    </nav>
+</header>
 
 <!-- Appointment Form Section -->
-<section class="bg-gray-100 py-20">
-    <div class="container mx-auto px-4">
-        <div class="max-w-lg mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Book an Appointment</h2>
-            <form id="appointmentForm" class="space-y-4" action="submit_appointment.php" method="post">
-                <div>
-                    <label for="name" class="block text-gray-700">Your Name:</label>
-                    <input type="text" id="name" name="name" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
-                </div>
-                <div>
-                    <label for="rollNumber" class="block text-gray-700">Roll Number:</label>
-                    <input type="text" id="rollNumber" name="roll_number" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
-                </div>
-                <div>
-                    <label for="email" class="block text-gray-700">Email Address:</label>
-                    <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
-                    <p id="emailError" class="text-red-500 hidden">Please use your acity.edu.gh email account.</p>
-                </div>
-                <div>
-                    <label for="date" class="block text-gray-700">Preferred Date:</label>
-                    <input type="date" id="date" name="date" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
-                    <p id="dateError" class="text-red-500 hidden">Sorry, this date is unavailable. Please choose another date.</p>
-                </div>
-                <div>
-                    <label for="time" class="block text-gray-700">Preferred Time:</label>
-                    <input type="time" id="time" name="time" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
-                    <p id="timeError" class="text-red-500 hidden">Sorry, this time slot is unavailable. Please choose another time.</p>
-                </div>
-                <div>
-                    <label for="message" class="block text-gray-700">Message (Optional):</label>
-                    <textarea id="message" name="message" rows="4" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"></textarea>
-                </div>
-                <div>
-                    <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-600 transition duration-300">Submit Appointment Request</button>
-                </div>
-            </form>
+<main>
+    <section class="bg-gray-100 py-20">
+        <div class="container mx-auto px-4">
+            <div class="max-w-lg mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-8 text-center">Book an Appointment</h2>
+                <form id="appointmentForm" class="space-y-4" action="submit_appointment.php" method="post">
+                    <div>
+                        <label for="name" class="block text-gray-700">Your Name:</label>
+                        <input type="text" id="name" name="name" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="rollNumber" class="block text-gray-700">Roll Number:</label>
+                        <input type="text" id="rollNumber" name="roll_number" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700">Email Address:</label>
+                        <input type="email" id="email" name="email" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
+                        <p id="emailError" class="text-red-500 hidden">Please use your acity.edu.gh email account.</p>
+                    </div>
+                    <div>
+                        <label for="date" class="block text-gray-700">Preferred Date:</label>
+                        <input type="date" id="date" name="date" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
+                        <p id="dateError" class="text-red-500 hidden">Sorry, this date is unavailable. Please choose another date.</p>
+                    </div>
+                    <div>
+                        <label for="time" class="block text-gray-700">Preferred Time:</label>
+                        <input type="time" id="time" name="time" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500" required>
+                        <p id="timeError" class="text-red-500 hidden">Sorry, this time slot is unavailable. Please choose another time.</p>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-gray-700">Message (Optional):</label>
+                        <textarea id="message" name="message" rows="4" class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-600 transition duration-300">Submit Appointment Request</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</main>
 
 <!-- JavaScript for form validation and availability check -->
 <script>
