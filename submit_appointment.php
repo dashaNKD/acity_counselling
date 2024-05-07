@@ -1,6 +1,22 @@
 <?php
 require_once 'config.php'; // Include the database connection
 
+// Function to fetch appointments from database
+function fetchAppointments($conn) {
+    $sql = "SELECT * FROM appointments ORDER BY date, time ASC"; // Replace with your specific query
+    $result = $conn->query($sql);
+  
+    if ($result->num_rows > 0) {
+      $appointments = [];
+      while ($row = $result->fetch_assoc()) {
+        $appointments[] = $row;
+      }
+      return $appointments;
+    } else {
+      return []; // Return empty array if no appointments found
+    }
+  }
+
 // Define regular expressions for basic validation (replace with more robust validation if needed)
 $nameRegex = "/^[a-zA-Z ]+$/"; // Allow letters and spaces for name
 $emailRegex = "/^[^\s@]+@[^\s@]+\.[^\s@]+$/"; // Basic email format
@@ -36,11 +52,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sssssss", $name, $rollNumber, $email, $date, $time, $message);
 
     if ($stmt->execute()) {
-      // Appointment creation successful, redirect to booked_appointments.php
-      header("Location: booked_appointment.php?success=Appointment+submitted+successfully.");
+      // Appointment creation successful, consider using fetchAppointments to update view (optional)
+      // header("Location: booked_appointments.php?success=Appointment+submitted+successfully.");  // Uncomment for redirection
+
+      // (Optional) Call fetchAppointments function to update appointments view (replace with your actual function call)
+      $appointments = fetchAppointments($conn);  
+  
     } else {
       // Appointment creation failed, redirect with error message
-      header("Location: booked_appointment.php?error=" . urlencode($stmt->error));
+      header("Location: booked_appointments.php?error=" . urlencode($stmt->error));
     }
 
     $stmt->close();
