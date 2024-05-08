@@ -1,6 +1,6 @@
 <?php
 // Include the database connection file
-include 'connect.php';
+include 'config.php';
 
 // Sign Up Process
 if(isset($_POST['signUp'])){
