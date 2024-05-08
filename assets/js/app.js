@@ -12,27 +12,31 @@ appointmentForm.addEventListener('submit', (event) => {
 
     // email validation
     if (!email.endsWith('@acity.edu.gh')) {
-        alert('Please use your acity.edu.gh email account.');
+        showError('emailError', 'Please use your acity.edu.gh email account.');
         return;
     }
 
     // date validation
     const today = new Date();
     const selectedDate = new Date(date);
-    if (selectedDate< today) {
-        alert('Sorry, this date is unavailable. Please choose another date.');
+    if (selectedDate < today) {
+        showError('dateError', 'Sorry, this date is unavailable. Please choose another date.');
         return;
     }
 
     // time validation
     if (!availableTimes.includes(time)) {
-        alert('Sorry, this time slot is unavailable. Please choose another time.');
+        showError('timeError', 'Sorry, this time slot is unavailable. Please choose another time.');
         return;
     }
 
-    // reset form
-    appointmentForm.reset();
-
     // submit form
+    appointmentForm.submit();
     alert('Appointment request submitted successfully!');
 });
+
+function showError(errorId, message) {
+    const errorElement = document.getElementById(errorId);
+    errorElement.textContent = message;
+    errorElement.classList.remove('hidden');
+}
