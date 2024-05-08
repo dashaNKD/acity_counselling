@@ -3,7 +3,7 @@
 session_start();
 
 // Include connection file
-require_once("connect.php");
+require_once("config.php");
 ?>
 
 
