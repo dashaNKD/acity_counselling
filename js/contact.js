@@ -43,8 +43,14 @@ function validateForm(name, rollNumber, email, message) {
 }
 
 function sanitizeInput(input) {
-    // Implement sanitization logic here (e.g., removing special characters)
-    // This function prevents SQL injection and other security vulnerabilities
-    // Example: return input.replace(/[^a-zA-Z0-9]/g, '');
+    // Remove leading and trailing whitespace
+    input = input.trim();
+
+    // Escape special characters that could be used for SQL injection
+    // For example, replace single quotes (') with double single quotes ('')
+    input = input.replace(/'/g, "''");
+
+    // Other sanitization logic can be added as needed
+
     return input;
 }
