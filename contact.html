@@ -110,30 +110,7 @@
 <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNNZ4IOHjf6m4dG_JSSfZQjxEmGQd5MQE&callback=console.debug&libraries=maps,marker&v=beta"></script>
 
 <!-- Javascript for form validation -->
-<script>
-    const form = document.getElementById('appointmentForm');
-    const emailError = document.getElementById('emailError');
-
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        const email = document.getElementById('email').value;
-
-        // Email validation
-        if (!email.endsWith('@acity.edu.gh')) {
-            emailError.classList.remove('hidden');
-            return;
-        } else {
-            emailError.classList.add('hidden');
-        }
-
-        // Reset form
-        form.reset();
-
-        // Submit form
-        alert('Appointment request submitted successfully!');
-    });
-</script>
+<script src="js/contact.js"></script>
 
 <!-- JavaScript for smooth scrolling -->
 <script src="assets/js/script.js"></script>
