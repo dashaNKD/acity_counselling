@@ -29,7 +29,7 @@ if ($stmt) {
         $status = 'canceled';
     } else {
         // Redirect back to the booked_appointment.php file with an error message
-        header("Location: booked_appointment.php?error=Invalid+action.");
+        header("Location: appointments.php?error=Invalid+action.");
         exit();
     }
 
@@ -39,17 +39,17 @@ if ($stmt) {
     // Execute the SQL statement
     if ($stmt->execute()) {
         // Redirect back to the booked_appointment.php file with a success message
-        header("Location: booked_appointment.php?success=Appointment+status+updated+successfully.");
+        header("Location: appointments.php?success=Appointment+status+updated+successfully.");
     } else {
         // Redirect back to the booked_appointment.php file with an error message
-        header("Location: booked_appointment.php?error=" . urlencode($stmt->error));
+        header("Location: appointments.php?error=" . urlencode($stmt->error));
     }
 
     // Close the statement and the connection
     $stmt->close();
 } else {
     // Redirect back to the booked_appointment.php file with an error message
-    header("Location: booked_appointment.php?error=" . urlencode($conn->error));
+    header("Location: appointments.php?error=" . urlencode($conn->error));
 }
 
 // Close the connection
