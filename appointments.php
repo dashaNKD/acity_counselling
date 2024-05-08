@@ -107,84 +107,51 @@ $appointments = fetchAppointments($conn);
 
 <!-- Main content -->
 <main class="container mx-auto px-4 py-10">
-    <h1 class="text-3xl font-bold mb-4">Booked Appointments</h1>
-    <form action="appointments.php" method="post" class="bg-white p-4 rounded">
-        <div class="mb-4">
-            <label for="name" class="block mb-2 text-sm font-bold text-gray-700">Name</label>
-            <input type="text" name="name" id="name" class="w-full p-2 border rounded" required>
-        </div>
-        <div class="mb-4">
-            <label for="rollNumber" class="block mb-2 text-sm font-bold text-gray-700">Roll Number</label>
-            <input type="text" name="rollNumber" id="rollNumber" class="w-full p-2 border rounded">
-        </div>
-        <div class="mb-4">
-            <label for="email" class="block mb-2 text-sm font-bold text-gray-700">Email</label>
-            <input type="email" name="email" id="email" class="w-full p-2 border rounded" required>
-        </div>
-        <div class="mb-4">
-            <label for="date" class="block mb-2 text-sm font-bold text-gray-700">Date</label>
-            <input type="date" name="date" id="date" class="w-full p-2 border rounded" required>
-        </div>
-        <div class="mb-4">
-            <label for="time" class="block mb-2 text-sm font-bold text-gray-700">Time</label>
-            <input type="time" name="time" id="time" class="w-full p-2 border rounded" required>
-        </div>
-        <div class="mb-4">
-            <label for="message" class="block mb-2 text-sm font-bold text-gray-700">Message</label>
-            <textarea name="message" id="message" rows="4" class="w-full p-2 border rounded" required></textarea>
-        </div>
-        <div class="mb-4">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Book Appointment
-            </button>
-        </div>
-    </form>
-
     <!-- Display existing appointments -->
-<h2 class="text-2xl font-bold mb-4">Current Appointments</h2>
-<table class="w-full bg-white rounded-lg overflow-hidden">
-    <thead class="bg-gray-200">
-        <tr>
-            <th class="text-left py-2 px-4">Name</th>
-            <th class="text-left py-2 px-4">Roll Number</th>
-            <th class="text-left py-2 px-4">Email</th>
-            <th class="text-left py-2 px-4">Date</th>
-            <th class="text-left py-2 px-4">Time</th>
-            <th class="text-left py-2 px-4">Message</th>
-            <th class="text-left py-2 px-4">Status</th>
-            <th class="text-left py-2 px-4">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($appointments as $appointment):?>
+    <h2 class="text-2xl font-bold mb-4">Current Appointments</h2>
+    <table class="w-full bg-white rounded-lg overflow-hidden">
+        <thead class="bg-gray-200">
             <tr>
-                <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['name']);?></td>
-                <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['roll_number']);?></td>
-                <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['email']);?></td>
-                <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['date']);?></td>
-                <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['time']);?></td>
-                <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['message']);?></td>
-                <td class="border py-2 px-4">
-                    <?php if ($appointment['status'] === 'pending'):?>
-                        <span class="bg-yellow-200 text-yellow-700 py-1 px-3 rounded-full">Pending</span>
-                    <?php elseif ($appointment['status'] === 'confirmed'):?>
-                        <span class="bg-green-200 text-green-700 py-1 px-3 rounded-full">Confirmed</span>
-                    <?php else:?>
-                        <span class="bg-red-200 text-red-700 py-1 px-3 rounded-full">Canceled</span>
-                    <?php endif;?>
-                </td>
-                <td class="border py-2 px-4">
-                    <form action="reschedule.php" method="post">
-                        <input type="hidden" name="id" value="<?php echo $appointment['id'];?>">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Reschedule
-                        </button>
-                    </form>
-                </td>
+                <th class="text-left py-2 px-4">Name</th>
+                <th class="text-left py-2 px-4">Roll Number</th>
+                <th class="text-left py-2 px-4">Email</th>
+                <th class="text-left py-2 px-4">Date</th>
+                <th class="text-left py-2 px-4">Time</th>
+                <th class="text-left py-2 px-4">Message</th>
+                <th class="text-left py-2 px-4">Status</th>
+                <th class="text-left py-2 px-4">Actions</th>
             </tr>
-        <?php endforeach;?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <?php foreach ($appointments as $appointment):?>
+                <tr>
+                    <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['name']);?></td>
+                    <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['roll_number']);?></td>
+                    <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['email']);?></td>
+                    <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['date']);?></td>
+                    <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['time']);?></td>
+                    <td class="border py-2 px-4"><?php echo htmlspecialchars($appointment['message']);?></td>
+                    <td class="border py-2 px-4">
+                        <?php if ($appointment['status'] === 'pending'):?>
+                            <span class="bg-yellow-200 text-yellow-700 py-1 px-3 rounded-full">Pending</span>
+                        <?php elseif ($appointment['status'] === 'confirmed'):?>
+                            <span class="bg-green-200 text-green-700 py-1 px-3 rounded-full">Confirmed</span>
+                        <?php else:?>
+                            <span class="bg-red-200 text-red-700 py-1 px-3 rounded-full">Canceled</span>
+                        <?php endif;?>
+                    </td>
+                    <td class="border py-2 px-4">
+                        <form action="reschedule.php" method="post">
+                            <input type="hidden" name="id" value="<?php echo $appointment['id'];?>">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Reschedule
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
 </main>
 
 <!-- Footer -->
