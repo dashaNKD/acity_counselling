@@ -86,6 +86,14 @@
     </div>
 </footer>
 
+<!-- PHP code for displaying success message -->
+<?php
+if (isset($_GET['message'])) {
+    $successMessage = $_GET['message'];
+    echo '<p class="text-green-500">' . htmlspecialchars($successMessage) . '</p>';
+}
+?>
+
 <script src="js/app.js"></script>
 <script src="js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
