@@ -15,7 +15,11 @@ $sql = "INSERT INTO appointments (name, roll_number, email, date, time, message)
         VALUES ('$name', '$rollNumber', '$email', '$date', '$time', '$message')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    // Set success message
+    $successMessage = "In-person session successfully booked!";
+    // Redirect user to appointments.html after successful booking
+    header('Location: appointments.html?message=' . urlencode($successMessage));
+    exit(); // Ensure no further output is sent
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
