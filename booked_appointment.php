@@ -96,7 +96,7 @@ $appointments = fetchAppointments($conn);
                 <li><a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a></li>
                 <li><a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a></li>
                 <li>
-                    <a href="login.php" class="text-gray-300 hover:text-white px-3 py-2">Login</a>
+                    <a href="logout.php" class="text-gray-300 hover:text-white px-3 py-2">Logout</a>
                 </li>
             </ul>
         </div>
