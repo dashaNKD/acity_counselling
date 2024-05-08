@@ -22,6 +22,9 @@ appointmentForm.addEventListener('submit', (event) => {
     if (selectedDate < today) {
         showError('dateError', 'Sorry, this date is unavailable. Please choose another date.');
         return;
+    } else if (selectedDate.toDateString() === today.toDateString() &&!isAvailableToday(time)) {
+        showError('dateError', 'Sorry, this date is not available today. Please choose another date.');
+        return;
     }
 
     // time validation
@@ -39,4 +42,12 @@ function showError(errorId, message) {
     const errorElement = document.getElementById(errorId);
     errorElement.textContent = message;
     errorElement.classList.remove('hidden');
+}
+
+function isAvailableToday(time) {
+    // assume you have a function to check if the time is available today
+    // for demonstration purposes, I'll just return true
+    return true;
+    // you can implement your logic to check if the time is available today
+    // for example, you can make an API call to check the availability
 }
