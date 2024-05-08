@@ -54,6 +54,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($stmt->execute()) {
       // Appointment creation successful, update appointments view
       $appointments = fetchAppointments($conn);  
+      header('Location: appointments.php'); // Redirect to same page to avoid resubmission
+      exit;
     } else {
       $errors[] = "Error creating appointment: ". $stmt->error;
     }
