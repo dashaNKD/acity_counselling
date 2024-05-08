@@ -13,7 +13,11 @@ $sql = "INSERT INTO messages (name, roll_number, email, message)
         VALUES ('$name', '$rollNumber', '$email', '$message')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
+    // Set success message
+    $successMessage = "In-person session successfully booked!";
+    // Redirect user to contact.html after successful message
+    header('Location: contact.html?message=' . urlencode($successMessage));
+    exit(); // Ensure no further output is sent
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
