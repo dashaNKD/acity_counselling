@@ -18,42 +18,51 @@ appointmentForm.addEventListener('submit', (event) => {
   const date = formData.get('date');
   const time = formData.get('time');
 
-  // email validation
-  if (!email.match(/^[a-zA-Z0-9._%+-]+@acity\.edu\.gh$/)) {
+  // Email validation
+  if (!validateEmail(email)) {
     showError('emailError', ERROR_MESSAGES.email);
     return;
   }
 
-  // date validation
-  const today = new Date();
-  const selectedDate = new Date(date);
-  if (selectedDate < today) {
-    showError('dateError', ERROR_MESSAGES.date);
-    return;
-  } else if (selectedDate.toDateString() === today.toDateString() &&!isAvailableToday(time)) {
+  // Date validation
+  if (!validateDate(date)) {
     showError('dateError', ERROR_MESSAGES.date);
     return;
   }
 
-  // time validation
-  if (!availableTimes.has(time)) {
+  // Time validation
+  if (!validateTime(time)) {
     showError('timeError', ERROR_MESSAGES.time);
     return;
   }
 
-  // submit form
+  // Submit form
   appointmentForm.submit();
   alert('Appointment request submitted successfully!');
 });
 
+// Function to validate email format
+function validateEmail(email) {
+  return /^[a-zA-Z0-9._%+-]+@acity\.edu\.gh$/.test(email);
+}
+
+// Function to validate date format and availability
+function validateDate(date) {
+  const today = new Date();
+  const selectedDate = new Date(date);
+  return selectedDate >= today && !unavailableTimesToday.has(date);
+}
+
+// Function to validate time format and availability
+function validateTime(time) {
+  return availableTimes.has(time) && !unavailableTimesToday.has(time);
+}
+
+// Function to show error messages
 function showError(errorId, message) {
   const errorElement = document.getElementById(errorId);
   errorElement.textContent = message;
   errorElement.classList.remove('hidden');
-}
-
-function isAvailableToday(time) {
-  return!unavailableTimesToday.has(time);
 }
 
 // Update unavailable times when a user selects a time
