@@ -21,7 +21,7 @@ require_once("connect.php");
     <style>
         body {
             position: relative;
-            background-image: url('assets/img/Mental Health.jpeg');
+            background-image: url('assets/img/mentalHealth.jpeg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
