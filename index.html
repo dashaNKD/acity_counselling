@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acity Counselling Service</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
-        /* Custom styles can be added here */
         body {
             position: relative;
-            background: cover no-repeat fixed url('assets/img/mentalHealth.jpeg');
+            background-image: url('assets/img/Mental Health.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
         /* Watermark effect */
@@ -31,6 +34,19 @@
             backdrop-filter: blur(10px); /* Blur effect */
             border-radius: 20px; /* Rounded corners */
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow */
+        }
+
+        /* Red button styles */
+        .red-button {
+            background-color: #f44336; /* Red color */
+        }
+
+        .red-button:hover {
+            background-color: #da190b; /* Dark red color */
+        }
+
+        .red-button:hover .text-white {
+            font-weight: bold; /* Bolden text on hover */
         }
     </style>
 </head>
@@ -109,7 +125,7 @@
     </div>
 </footer>
 
-<script src="assets/js/index.js"></script>
+<script src="assets/js/custom.js"></script>
 <script src="assets/js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
