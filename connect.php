@@ -3,7 +3,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$database = "login";
+$database = "acity_counselling";
 
 // Check if mysqli extension is available
 if (!function_exists('mysqli_init') &&!class_exists('mysqli')) {
@@ -16,6 +16,5 @@ $conn = new mysqli($host, $username, $password, $database);
 
 // Check for connection errors
 if ($conn->connect_error) {
-    echo "Connection to DB failed: ". $conn->connect_error;
-    exit(); // Exit the script to prevent further execution
+    die("Connection failed: " . $conn->connect_error);
 }
