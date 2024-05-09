@@ -3,7 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Counselor Dashboard</title>
+    <title>Acity Counselling Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            position: relative;
+            background-image: url('img/mentalHealth.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        /* Watermark effect */
+        .logo-watermark {
+            position: fixed;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: -1;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            transform: rotate(30deg) scale(1.5);
+        }
+
+        /* Glassmorphism effect */
+        .glassmorphism {
+            background-color: rgba(255, 255, 255, 0.3); /* Background color with transparency */
+            -webkit-backdrop-filter: blur(10px); /* Blur effect */
+            backdrop-filter: blur(10px); /* Blur effect */
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Box shadow */
+        }
+
+        /* Red button styles */
+        .red-button {
+            background-color: #f44336; /* Red color */
+        }
+
+        .red-button:hover {
+            background-color: #da190b; /* Dark red color */
+        }
+
+        .red-button:hover .text-white {
+            font-weight: bold; /* Bolden text on hover */
+        }
+    </style>
 </head>
 <body>
 
@@ -11,7 +55,7 @@
 <nav class="bg-gray-800 py-4">
     <div class="container mx-auto flex justify-between items-center px-4">
         <div>
-            <a href="index.html" class="flex items-center text-white text-xl font-bold">
+            <a href="counselor_dashboard.html" class="flex items-center text-white text-xl font-bold">
                 <img src="img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
                 Acity Counselling Service
             </a>
@@ -32,49 +76,84 @@
     </div>
 </nav>
 
+<!-- Hero Section -->
+<section class="glassmorphism bg-gray-100 py-20">
+    <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to the Acity Counselling Service</h1>
+            <p class="text-lg text-gray-700 mb-8">We are here to support your mental health and well-being.</p>
+            <a href="services.html" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
 <main>
-    <!-- Hero Section -->
-    <section class="glassmorphism bg-gray-100 py-20">
+    <section id="services" class="py-20">
         <div class="container mx-auto px-4">
             <div class="max-w-3xl mx-auto text-center">
-                <h1 class="text-4xl md:text-6xl font-bold mb-4">Welcome to the Acity Counselling Service</h1>
-                <p class="text-lg text-gray-700 mb-8">We are here to support your mental health and well-being.</p>
-                <a href="services.html" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300">Learn More</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Display Appointments -->
-    <section class="appointments" class="py-20">
-        <h2 class="text-3xl md:text-4xl font-bold mb-8">Appointments</h2>
-        <table>
-            <tr>
-                <th>Client Name</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-            <?php if ($result->num_rows > 0) {?>
-                <?php while ($row = $result->fetch_assoc()) {?>
-                    <tr>
-                        <td><?= $row['name']?></td>
-                        <td><?= $row['date']?></td>
-                        <td><?= $row['time']?></td>
-                        <td><?= $row['status']?></td>
-                        <td>
-                            <button>Accept</button>
-                            <button>Cancel</button>
-                            <button>Reschedule</button>
-                        </td>
-                    </tr>
-                <?php }?>
-            <?php } else {?>
-                <tr><td colspan="5">No appointments found</td></tr>
-            <?php }?>
-        </table>
+                <h2 class="text-3xl md:text-4xl font-bold mb-8">Our Services</h2>
+                <!-- Appointments Card -->
+                <!-- Display Appointments -->
+                <div class="glassmorphism bg-white shadow-md rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-semibold mb-4">Appointments</h3>
+                    <table>
+                        <tr>
+                            <th>Client Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        <?php if ($result->num_rows > 0) {?>
+                            <?php while ($row = $result->fetch_assoc()) {?>
+                                <tr>
+                                    <td><?= $row['name']?></td>
+                                    <td><?= $row['date']?></td>
+                                    <td><?= $row['time']?></td>
+                                    <td><?= $row['status']?></td>
+                                    <td>
+                                        <button>Accept</button>
+                                        <button>Cancel</button>
+                                        <button>Reschedule</button>
+                                    </td>
+                                </tr>
+                            <?php }?>
+                        <?php } else {?>
+                            <tr><td colspan="5">No appointments found</td></tr>
+                        <?php }?>
+                    </table>
+            
+                </div>
+                <!-- End of Appointments Card -->
     </section>
 </main>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<!-- Footer -->
+<footer class="bg-gray-800 py-8">
+    <div class="container mx-auto px-4">
+        <div class="text-center">
+            <a href="counselor_dashboard.html" class="flex items-center text-white text-xl font-bold">
+                <img src="img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
+                Acity Counselling Service
+            </a>
+            <p class="text-white">&copy; 2024 Academic City University College Counselling Service. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/custom.js"></script>
+<script src="js/script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
 </html>
