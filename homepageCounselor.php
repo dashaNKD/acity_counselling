@@ -16,7 +16,7 @@ require_once("config.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acity Counselling Service</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
@@ -69,7 +69,7 @@ require_once("config.php");
     <div class="container mx-auto flex justify-between items-center px-4">
         <div>
             <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
-                <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
+                <img src="img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
                 Acity Counselling Service
             </a>
         </div>
@@ -129,7 +129,7 @@ require_once("config.php");
     <div class="container mx-auto px-4">
         <div class="text-center">
             <a href="homepageCounselor.php" class="flex items-center text-white text-xl font-bold">
-                <img src="assets/img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
+                <img src="img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
                 Acity Counselling Service
             </a>
             <p class="text-white">&copy; 2024 Academic City University College Counselling Service. All rights reserved.</p>
@@ -137,7 +137,7 @@ require_once("config.php");
     </div>
 </footer>
 
-<script src="assets/js/script.js"></script>
+<script src="js/script.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </body>
