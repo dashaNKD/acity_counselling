@@ -29,7 +29,7 @@ if (isset($_POST['signUp'])) {
         echo "Email Already Exists!";
     } else {
         // Hash the password using password_hash (instead of MD5)
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert the counselor into the database
         $insertQuery = "INSERT INTO counselors (first_name, last_name, email, password_hash) VALUES (?,?,?,?)";
