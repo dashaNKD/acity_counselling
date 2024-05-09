@@ -37,7 +37,7 @@ if (isset($_POST['signUp'])) {
             exit();
         }
 
-        header("Location: counselor_dashboard.php");
+        header("Location: counselor_dashboard.html");
         exit(); // Add exit to prevent further execution
     }
 }
@@ -63,7 +63,7 @@ if (isset($_POST['signIn'])) {
         $row = $result->fetch_assoc();
         if ($password === $row['password']) {
             $_SESSION['email'] = $email;
-            header("Location: counselor_dashboard.php");
+            header("Location: counselor_dashboard.html");
             exit(); // Add exit to prevent further execution
         } else {
             echo "Invalid Email or Password";
