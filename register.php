@@ -7,64 +7,61 @@ session_start();
 
 // Sign Up Process
 if (isset($_POST['signUp'])) {
-    $firstName = $_POST['fName'];
-    $lastName = $_POST['lName'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // Validate and sanitize input data
-    $firstName = filter_var($firstName, FILTER_SANITIZE_STRING);
-    $lastName = filter_var($lastName, FILTER_SANITIZE_STRING);
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $password = filter_var($password, FILTER_SANITIZE_STRING);
+    $firstName = filter_input(INPUT_POST, 'fName', FILTER_SANITIZE_STRING);
+    $lastName = filter_input(INPUT_POST, 'lName', FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
     // Check if the email already exists
     $checkEmailSql = "SELECT * FROM counselors WHERE email =?";
     $stmt = $conn->prepare($checkEmailSql);
     $stmt->bind_param("s", $email);
-    $stmt->execute();
+
+    if (!$stmt->execute()) {
+        echo "Error: " . $conn->error;
+        exit();
+    }
+
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         echo "Email Already Exists!";
     } else {
-        // Hash the password using password_hash (instead of MD5)
-        //$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
         // Insert the counselor into the database
-        $insertQuery = "INSERT INTO counselors (first_name, last_name, email, password_hash) VALUES (?,?,?,?)";
+        $insertQuery = "INSERT INTO counselors (first_name, last_name, email, password) VALUES (?,?,?,?)";
         $stmt = $conn->prepare($insertQuery);
-        $stmt->bind_param("ssss", $firstName, $lastName, $email, $hashedPassword);
+        $stmt->bind_param("ssss", $firstName, $lastName, $email, $password);
 
-        if ($stmt->execute()) {
-            header("Location: counselor_dashboard.php");
-            exit(); // Add exit to prevent further execution
-        } else {
-            echo "Error: ". $conn->error;
+        if (!$stmt->execute()) {
+            echo "Error: " . $conn->error;
+            exit();
         }
+
+        header("Location: counselor_dashboard.php");
+        exit(); // Add exit to prevent further execution
     }
 }
 
 // Sign In Process
 if (isset($_POST['signIn'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    // Validate and sanitize input data
-    $email = filter_var($email, FILTER_SANITIZE_EMAIL);
-    $password = filter_var($password, FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
     // Check if the counselor exists in the database
     $sql = "SELECT * FROM counselors WHERE email =?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
 
-    $stmt->execute();
+    if (!$stmt->execute()) {
+        echo "Error: " . $conn->error;
+        exit();
+    }
+
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password_hash'])) {
+        if ($password === $row['password']) {
             $_SESSION['email'] = $email;
             header("Location: counselor_dashboard.php");
             exit(); // Add exit to prevent further execution
