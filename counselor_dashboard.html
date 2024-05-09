@@ -8,63 +8,63 @@
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav class="bg-gray-800 py-4">
-        <div class="container mx-auto flex justify-between items-center px-4">
-            <div>
-                <a href="index.html" class="flex items-center text-white text-xl font-bold">
-                    <img src="img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
-                    Acity Counselling Service
-                </a>
-            </div>
-            <div>
-                <ul class="flex justify-between">
-                    <li><a href="about.html" class="text-gray-300 hover:text-white px-3 py-2">About Us</a></li>
-                    <li><a href="resources.html" class="text-gray-300 hover:text-white px-3 py-2">Resources</a></li>
-                    <li><a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a></li>
-                    <li><a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a></li>
-                    <li>
-                        <a href="logout.php" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 md:w-auto">
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
+<!-- Navigation -->
+<nav class="bg-gray-800 py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+        <div>
+            <a href="index.html" class="flex items-center text-white text-xl font-bold">
+                <img src="img/currentAcityLogo.png" alt="Acity Counselling Service logo" class="h-8 mr-2">
+                Acity Counselling Service
+            </a>
         </div>
-    </nav>
+        <div>
+            <ul class="flex justify-between">
+                <li><a href="about.html" class="text-gray-300 hover:text-white px-3 py-2">About Us</a></li>
+                <li><a href="resources.html" class="text-gray-300 hover:text-white px-3 py-2">Resources</a></li>
+                <li><a href="services.html" class="text-gray-300 hover:text-white px-3 py-2">Services</a></li>
+                <li><a href="contact.html" class="text-gray-300 hover:text-white px-3 py-2">Contact Us</a></li>
+                <li>
+                    <a href="logout.php" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-bold transition duration-300 md:w-auto">
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <main>
-        <!-- Display Appointments -->
-        <section class="appointments">
-            <h2>Appointments</h2>
-            <table>
-                <tr>
-                    <th>Client Name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-                <?php if ($result->num_rows > 0) {?>
-                    <?php while ($row = $result->fetch_assoc()) {?>
-                        <tr>
-                            <td><?= $row['name']?></td>
-                            <td><?= $row['date']?></td>
-                            <td><?= $row['time']?></td>
-                            <td><?= $row['status']?></td>
-                            <td>
-                                <button>Accept</button>
-                                <button>Cancel</button>
-                                <button>Reschedule</button>
-                            </td>
-                        </tr>
-                    <?php }?>
-                <?php } else {?>
-                    <tr><td colspan="5">No appointments found</td></tr>
+<main>
+    <!-- Display Appointments -->
+    <section class="appointments">
+        <h2>Appointments</h2>
+        <table>
+            <tr>
+                <th>Client Name</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            <?php if ($result->num_rows > 0) {?>
+                <?php while ($row = $result->fetch_assoc()) {?>
+                    <tr>
+                        <td><?= $row['name']?></td>
+                        <td><?= $row['date']?></td>
+                        <td><?= $row['time']?></td>
+                        <td><?= $row['status']?></td>
+                        <td>
+                            <button>Accept</button>
+                            <button>Cancel</button>
+                            <button>Reschedule</button>
+                        </td>
+                    </tr>
                 <?php }?>
-            </table>
-        </section>
-    </main>
+            <?php } else {?>
+                <tr><td colspan="5">No appointments found</td></tr>
+            <?php }?>
+        </table>
+    </section>
+</main>
 
 </body>
 </html>
