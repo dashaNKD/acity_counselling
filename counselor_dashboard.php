@@ -36,6 +36,7 @@
         </form>
     </header>
 
+<main>
     <!-- Display Appointments -->
     <section class="appointments">
         <h2>Appointments</h2>
@@ -68,6 +69,7 @@
             ?>
         </table>
     </section>
+</main>
 
 </body>
 </html>
