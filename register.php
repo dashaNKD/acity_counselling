@@ -80,4 +80,3 @@ if (isset($_POST['signIn'])) {
 
 // Close the database connection
 $conn->close();
-?>
