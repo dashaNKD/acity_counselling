@@ -68,7 +68,7 @@ if (isset($_POST['signIn'])) {
     if ($result->num_rows > 0) {
         session_start();
         $_SESSION['email'] = $email;
-        header("Location: homepageCounselor.php");
+        header("Location: counselor_dashboard.php");
         exit(); // Add exit to prevent further execution
     } else {
         echo "Invalid Email or Password";
