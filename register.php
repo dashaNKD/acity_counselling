@@ -34,7 +34,7 @@ if(isset($_POST['signUp'])){
         $stmt->bind_param("ssss", $firstName, $lastName, $email, $hashedPassword);
 
         if ($stmt->execute()) {
-            header("Location: counselor_login.php");
+            header("Location: counselor_dashboard.php");
             exit(); // Add exit to prevent further execution
         } else {
             echo "Error: ". $conn->error;
